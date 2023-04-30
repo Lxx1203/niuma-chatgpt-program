@@ -1,6 +1,7 @@
 package com.niuma.controller;
 
 import com.niuma.common.Result;
+import lombok.extern.slf4j.Slf4j;
 import niuma.com.chatgpt.GPTClient;
 import niuma.com.chatgpt.entity.ChatGPTMessage;
 import niuma.com.chatgpt.entity.Message;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/chatgpt")
 public class ChatGptController {
@@ -26,6 +28,7 @@ public class ChatGptController {
     }
     @PostMapping("/easy")
     public Result getEasyMessage(@RequestBody List<Message> messages) {
+        log.info("{}",messages);
         try {
             ChatGPTMessage send = gptClient.send(messages);
             Message message = send.getEasyMessage();

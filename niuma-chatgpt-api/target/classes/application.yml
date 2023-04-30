@@ -1,6 +1,0 @@
-niuma:
-  chatgpt:
-    client:
-      key:  # ????? key
-      proxy-host: 127.0.0.1
-      proxy-port: 7890

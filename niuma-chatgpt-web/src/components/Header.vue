@@ -1,19 +1,22 @@
-<script setup="ts">
-const clickLockHandler = () => {
-    console.log("clickLockHandler")
-}
+<script setup lang="ts">
+import useMessageStore from "../stores";
+
+const messageStore = useMessageStore();
+const clickCommentHandler = () => {
+  messageStore.clearMessageList();
+};
 
 const settingLockHandler = () => {
-    console.log("settingLockHandler")
-}
+  console.log("settingLockHandler");
+};
 </script>
 
 <template>
-    <div class="header-container">
-        <span><b>NiuMa GPT</b></span>
-        <van-icon name="setting" size="24" @click="settingLockHandler"/>
-        <van-icon name="lock" size="24" @click="clickLockHandler"/>
-    </div>
+  <div class="header-container">
+    <span><b>NiuMa GPT</b></span>
+    <van-icon name="setting" size="24" @click="settingLockHandler" />
+    <van-icon name="comment" size="24" @click="clickCommentHandler" />
+  </div>
 </template>
 
 <style lang="less" scoped>
@@ -22,7 +25,7 @@ const settingLockHandler = () => {
   font-size: 18px;
   padding: 20px;
   color: #f7fafe;
-    overflow: hidden;
+  overflow: hidden;
   .van-icon {
     float: right;
     margin: 0 5px;

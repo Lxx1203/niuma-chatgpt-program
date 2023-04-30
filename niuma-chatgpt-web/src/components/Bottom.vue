@@ -1,32 +1,64 @@
-<script setup="ts">
-import {ref} from "vue";
+<script setup lang="ts">
 import useMessageStore from "../stores/index.ts";
+import axios from "axios";
+import "vant/es/toast/style";
+import "vant/es/notify/style";
+import { showNotify, showLoadingToast, closeToast } from "vant";
 
 const messageStore = useMessageStore();
-let text = ref('');
-const clickHandler = () => {
-    console.log(text.value)
-    messageStore.addMessage({
-        role: "user",
-        context: text.value
-    })
-    text.value = ''
-}
-
-
+const clickHandler = async () => {
+  messageStore.addMessageList({
+    id: Date.now(),
+    role: "user",
+    content: messageStore.currentText,
+  });
+  const messageList = messageStore.messageList;
+  messageStore.currentText = "";
+  try {
+    showLoadingToast({
+      message: "加载中...",
+      forbidClick: true,
+    });
+    let res = await axios.post("/api/chatgpt/easy", messageList);
+    let data: any = res.data;
+    closeToast();
+    if (data.code == 1) {
+      data.data.id = Date.now();
+      messageStore.addMessageList(data.data);
+    } else {
+      messageStore.popMessageList();
+    }
+  } catch (error) {
+    closeToast();
+    showNotify({ type: "danger", message: "网络错误", duration: 1000 });
+    messageStore.popMessageList();
+  }
+};
 </script>
 
 <template>
-    <div class="bottom_container">
-        <van-field v-model="text" type="text" size="large" input-align="center" placeholder="欢迎使用牛马chatgpt">
-            <template #button>
-                <van-button size="large" type="primary" round color="#5c927c" @click="clickHandler"
-                            :disabled="text.length===0">
-                    <van-icon name="chat" color="#f7fafe" size="50"/>
-                </van-button>
-            </template>
-        </van-field>
-    </div>
+  <div class="bottom_container">
+    <van-field
+      v-model="messageStore.currentText"
+      type="text"
+      size="large"
+      input-align="center"
+      placeholder="欢迎使用牛马chatgpt"
+    >
+      <template #button>
+        <van-button
+          size="large"
+          type="primary"
+          round
+          color="#00994c"
+          @click="clickHandler"
+          :disabled="messageStore.currentText.length === 0"
+        >
+          <van-icon name="chat" color="#f7fafe" size="50" />
+        </van-button>
+      </template>
+    </van-field>
+  </div>
 </template>
 
 <style lang="less" scoped>
@@ -49,5 +81,4 @@ const clickHandler = () => {
     }
   }
 }
-
 </style>
