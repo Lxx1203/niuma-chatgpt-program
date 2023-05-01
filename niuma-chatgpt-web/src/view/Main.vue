@@ -65,11 +65,11 @@ const cartItemClickHandler = (e: any) => {
       margin-left: 20px;
     }
     .cart-item {
-      font-size: 14px;
+      font-size: 16px;
       margin-left: 20px;
       background-color: #282b34;
       height: 20px;
-      padding: 10px;
+      padding: 14px;
       border-radius: 1px;
       width: calc(80vw);
       border-bottom: #33363f 0.1px solid;

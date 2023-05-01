@@ -18,9 +18,11 @@ const clickHandler = async () => {
     showLoadingToast({
       message: "加载中...",
       forbidClick: true,
+      duration: 10000000,
     });
     let res = await axios.post("/api/chatgpt/easy", messageList);
     let data: any = res.data;
+    console.log("success");
     closeToast();
     if (data.code == 1) {
       data.data.id = Date.now();
@@ -39,6 +41,7 @@ const clickHandler = async () => {
 <template>
   <div class="bottom_container">
     <van-field
+      style="margin-bottom: 10px"
       v-model="messageStore.currentText"
       type="text"
       size="large"
@@ -54,7 +57,7 @@ const clickHandler = async () => {
           @click="clickHandler"
           :disabled="messageStore.currentText.length === 0"
         >
-          <van-icon name="chat" color="#f7fafe" size="50" />
+          <van-icon name="chat-o" color="#f7fafe" size="50" />
         </van-button>
       </template>
     </van-field>
@@ -68,10 +71,9 @@ const clickHandler = async () => {
   position: fixed;
   bottom: 0;
   left: 0;
-
+  background-color: #22222c;
   :deep(.van-cell) {
     background-color: #22222c;
-
     .van-field__control {
       color: #f7fafe;
       background-color: #414956;

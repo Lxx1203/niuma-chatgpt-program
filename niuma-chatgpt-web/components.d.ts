@@ -19,5 +19,6 @@ declare module '@vue/runtime-core' {
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
     VanField: typeof import('vant/es')['Field']
     VanIcon: typeof import('vant/es')['Icon']
+    VanNavBar: typeof import('vant/es')['NavBar']
   }
 }

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import useMessageStore from "../stores";
-
+import { useRouter } from "vue-router";
 const messageStore = useMessageStore();
 const clickCommentHandler = () => {
   messageStore.clearMessageList();
 };
-
+const router = useRouter();
 const settingLockHandler = () => {
-  console.log("settingLockHandler");
+  router.push("/setting");
 };
 </script>
 
@@ -22,7 +22,7 @@ const settingLockHandler = () => {
 <style lang="less" scoped>
 .header-container {
   background-color: #22222c;
-  font-size: 18px;
+  font-size: 20px;
   padding: 20px;
   color: #f7fafe;
   overflow: hidden;
