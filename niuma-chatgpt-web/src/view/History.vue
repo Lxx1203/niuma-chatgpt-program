@@ -20,7 +20,6 @@ const deleteHistory = (item: any) => {
   showConfirmDialog({
     title: "提示",
     message: "确定要删除吗？",
-    theme: "round-button",
   })
     .then(() => {
       historyStore.messageMap.delete(item);

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import useMessageStore from "../stores/index.ts";
+import useMessageStore from "../stores/messageStore.ts";
+import useHistoryStore from "../stores/historyStore.ts";
 import axios from "axios";
 import "vant/es/toast/style";
 import "vant/es/notify/style";
 import { showNotify, showLoadingToast, closeToast } from "vant";
-
+const historyStore = useHistoryStore();
 const messageStore = useMessageStore();
 const clickHandler = async () => {
   messageStore.addMessageList({
@@ -30,6 +31,9 @@ const clickHandler = async () => {
     } else {
       messageStore.popMessageList();
     }
+    historyStore.putMessage(messageStore.getId().toString(), [
+      ...messageStore.messageList,
+    ]);
   } catch (error) {
     closeToast();
     showNotify({ type: "danger", message: "网络错误", duration: 1000 });

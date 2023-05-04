@@ -4,22 +4,23 @@ import {
   Router,
   RouteRecordRaw,
 } from "vue-router";
-import App from "../view/Layout.vue";
-import Main from "../view/Main.vue";
-import Setting from "../view/Setting.vue";
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/setting",
-    component: Setting,
+    component: () => import("../view/Setting.vue"),
+  },
+  {
+    path: "/history",
+    component: () => import("../view/History.vue"),
   },
   {
     path: "/",
-    component: App,
+    component: () => import("../view/Layout.vue"),
     children: [
       {
         path: "",
-        component: Main,
+        component: () => import("../view/Main.vue"),
       },
     ],
   },
