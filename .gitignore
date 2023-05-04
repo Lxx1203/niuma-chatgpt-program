@@ -2,3 +2,4 @@
 */.vscode
 */.idea
 */target
+niuma-chatgpt-api/src/main/resources/config/application.yml
