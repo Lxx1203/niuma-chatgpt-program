@@ -23,5 +23,7 @@ niuma:
 ```
 **启动**
 ```
+因为本项目依赖的 spring-boot-niuma-chatgpt-starter 未发布到网上，所以需要开发者者用 maven 自行安装
+连接：https://github.com/Lxx1203/spring-boot-niuma-chatgpt-starter
 用 idea 打开项目，加载对应的 jar 包，运行 Application 类
 ```
