@@ -27,3 +27,4 @@ niuma:
 连接：https://github.com/Lxx1203/spring-boot-niuma-chatgpt-starter
 用 idea 打开项目，加载对应的 jar 包，运行 Application 类
 ```
+注意必须要设置代理，因为 open-ai 禁止大陆的 ip 访问
