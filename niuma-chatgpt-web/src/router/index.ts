@@ -4,7 +4,7 @@ import {
   Router,
   RouteRecordRaw,
 } from "vue-router";
-
+// 路由数组
 const routes: RouteRecordRaw[] = [
   {
     path: "/setting",
